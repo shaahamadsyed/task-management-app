@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -8,23 +7,40 @@ const logger = require("./utils/logger");
 
 const app = express();
 
-// Middleware
+/* ---------- Middleware ---------- */
 app.use(cors());
 app.use(express.json());
 
-// Routes
+/* ---------- Health Check (REQUIRED FOR RENDER) ---------- */
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
+/* ---------- Routes ---------- */
 app.use("/api/tasks", require("./routes/taskRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-// Global error handler (optional)
+/* ---------- Global Error Handler ---------- */
 app.use((err, req, res, next) => {
   logger.error(err.stack);
-  res.status(500).json({ message: "Server error", error: err.message });
+  res.status(500).json({
+    success: false,
+    message: "Server Error",
+    error: err.message
+  });
 });
 
-// Connect to MongoDB
-connectDB();
-
-// Start server
+/* ---------- Start Server AFTER DB ---------- */
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => logger.info(`Server running on port ${PORT}`));
+
+connectDB()
+  .then(() => {
+    app.listen(PORT, () =>
+      logger.info(`Server running on port ${PORT}`)
+    );
+  })
+  .catch((err) => {
+    logger.error("Failed to connect DB");
+    logger.error(err.message);
+    process.exit(1);
+  });
