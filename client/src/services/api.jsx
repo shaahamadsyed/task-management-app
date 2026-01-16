@@ -1,11 +1,10 @@
 import axios from "axios";
 
 
-// const BASE_URL =
-//   window.location.hostname === "localhost"
-//     ? "http://localhost:8000"                  // Dev backend
-//     : "https://task-management-api-31wz.onrender.com";    //
-const BASE_URL = "https://task-management-api-31wz.onrender.com";
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8000"                  // Dev backend
+    : "https://task-management-api-31wz.onrender.com";    //
 
 const api = axios.create({
   baseURL: `${BASE_URL}/api`, // include /api

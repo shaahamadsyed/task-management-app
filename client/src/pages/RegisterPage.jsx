@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { registerUser } from "../services/authService"; // use authService
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -33,13 +36,10 @@ function RegisterPage() {
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/users/register", {
-        name,
-        email,
-        password,
-      });
+      // Use authService to handle registration
+      const res = await registerUser({ name, email, password });
 
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.token);
       setSuccess("Registration successful! Redirecting...");
 
       setTimeout(() => navigate("/tasks"), 1000);
