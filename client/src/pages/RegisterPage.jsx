@@ -2,9 +2,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Alert } from "react-bootstrap";
 import { registerUser } from "../services/authService"; // use authService
 
 function RegisterPage() {
