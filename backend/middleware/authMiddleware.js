@@ -4,7 +4,7 @@ const User = require('../models/User');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = async (req, res, next) => {
-  // Extract token from Authorization header
+
   const token = req.header('Authorization')?.replace('Bearer ', '');
   if (!token) return res.status(401).json({ message: 'No token, authorization denied' });
 

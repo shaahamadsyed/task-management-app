@@ -34,7 +34,7 @@ exports.getTasks = async (req, res) => {
 // ======================= UPDATE TASK =======================
 exports.updateTask = async (req, res) => {
   try {
-    // Only update task if it belongs to logged-in user
+    // Only update task if belongs to logged-in user
     const updatedTask = await Task.findOneAndUpdate(
       { _id: req.params.id, user: req.user._id },
       {

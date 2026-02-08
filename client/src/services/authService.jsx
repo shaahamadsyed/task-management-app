@@ -10,7 +10,7 @@ export const registerUser = async (userData) => {
 export const loginUser = async (credentials) => {
   const res = await api.post("/users/login", credentials);
 
-  // Store JWT token securely
+ 
   localStorage.setItem("token", res.data.token);
 
   return res.data;
@@ -21,7 +21,6 @@ export const logoutUser = () => {
   localStorage.removeItem("token");
 };
 
-/* ================= TOKEN HELPERS ================= */
 export const getToken = () => {
   return localStorage.getItem("token");
 };

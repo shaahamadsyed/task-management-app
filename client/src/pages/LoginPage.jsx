@@ -21,7 +21,7 @@ function LoginPage({ setIsLoggedIn }) {
       // Login + store token
       await loginUser({ email, password });
 
-      // 🔑 THIS FIXES THE REFRESH ISSUE
+      //  THIS FIXES THE REFRESH ISSUE
       setIsLoggedIn(true);
 
       // Redirect immediately

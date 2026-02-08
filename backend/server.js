@@ -7,11 +7,9 @@ const logger = require("./utils/logger");
 
 const app = express();
 
-/* ---------- Middleware ---------- */
 app.use(cors());
 app.use(express.json());
 
-/* ---------- Health Check (REQUIRED FOR RENDER) ---------- */
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
@@ -30,7 +28,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-/* ---------- Start Server AFTER DB ---------- */
 const PORT = process.env.PORT || 8000;
 
 connectDB()

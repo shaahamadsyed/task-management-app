@@ -2,7 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'defaultsecret';
-const JWT_EXPIRES = '1h'; // token expiry
+const JWT_EXPIRES = '1h';
 
 // Register User
 exports.registerUser = async (req, res) => {
@@ -15,7 +15,7 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
 
-    // Create user (password will be hashed by model pre-save hook)
+    // Create user
     const user = new User({ name, email: email.toLowerCase(), password });
     await user.save();
 
